@@ -36,7 +36,7 @@ SECTION_COLORS = {
     "grabado": "#FFF5F8",
 }
 
-LOGO = ASSETS / "LOGO Grande.png"
+LOGO = ASSETS / "logo_principal.png"
 HERO = ASSETS / "IMG-20250906-WA0010.jpg"
 EVENT = ASSETS / "Camisetas fiesta tematica.jpeg"
 
