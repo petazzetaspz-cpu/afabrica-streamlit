@@ -49,21 +49,21 @@ EVENT = ASSETS / "eventos" / "evento_camisetas_01.png"
 SECTIONS = {
     "impresion": {
         "name": "Impresión",
-        "emoji": "🎨",
+        "emoji": "👕",
         "intro": (
-            "🎨 **Vinilo, DTF y sublimación** para dar vida a ideas bonitas y súper especiales.\n\n"
-            "👕 Personalizamos camisetas, sudaderas, bodies, bolsas, tazas, termos y botellas.\n"
+            "✨Vinilo, DTF y sublimación✨ para dar vida a ideas bonitas y súper especiales.\n\n"
+            "👚 Personalizamos camisetas, sudaderas, bodies, bolsas, tazas, termos y botellas.\n"
             "🎁 Ideal para regalos con nombre, detalles de bebé, fiestas, eventos y recuerdos únicos."
         ),
         "products": [
+            ("Body bebé personalizado", "12€", "👶 Dulce y muy especial", "impresion_bebe_body_06.png"),
+            ("Bolsa merienda", "4,90€", "🍪 Medida 20 x 25 cm", "impresion_bebe_bolsa_merienda_01.png"),
+            ("Botella", "8,50€", "🧒 Aluminio 550 ml", "impresion_nenes_botella_01.png"),
             ("Camiseta personalizada", "Desde 12€", "👕 Niños 12€ · Adultos 15€", "impresion_nenes_camiseta_04.png"),
+            ("Sudadera personalizada", "22€", "❤️ A tu gusto", "impresion_zadultos_sudadera_02.png"),
             ("Taza personalizada", "9€", "☕ Con foto, nombre o diseño especial", "impresion_objeto_taza_01.png"),
             ("Termo personalizado", "13,90€", "🥤 Acero inox 500 ml", "impresion_objeto_botella_04.png"),
-            ("Botella", "8,50€", "🧒 Aluminio 550 ml", "impresion_nenes_botella_01.png"),
-            ("Body bebé personalizado", "12€", "👶 Dulce y muy especial", "impresion_bebe_body_06.png"),
             ("Tote bag personalizada", "8€", "🎀 Ideal para para ti o para regalar", "impresion_objeto_totebag_01.png"),
-            ("Sudadera personalizada", "22€", "❤️ A tu gusto", "impresion_zadultos_sudadera_02.png"),
-            ("Bolsa merienda", "4,90€", "🍪 Medida 20 x 25 cm", "impresion_bebe_bolsa_merienda_01.png"),
             ("Tote bag bebé", "8€", "👶 Medida 33x40cm", "impresion_bebe_totebag_03.png"),
         ],
         "gallery": [
@@ -76,9 +76,9 @@ SECTIONS = {
         "name": "Bordado",
         "emoji": "🧵",
         "intro": (
-            "🧵 **Bordado en hilo** con un acabado bonito, elegante y duradero.\n\n"
+            "🧵 ✨Bordado en hilo✨ con un acabado bonito, elegante y duradero.\n\n"
             "👚 Perfecto para nombres, iniciales y detalles especiales en prendas o complementos.\n"
-            "✨ El precio depende del tamaño del bordado, la complejidad y de si traes la prenda o la ponemos nosotras."
+            "💰 El precio depende del tamaño del bordado, la complejidad y de si traes la prenda o la ponemos nosotros."
         ),
         "products": [
             ("Bordado pequeño", "Desde 5€", "🪡 Nombre o detalle sencillo", "bordado_objeto_bolsa_merienda_02.png"),
@@ -94,7 +94,7 @@ SECTIONS = {
         "name": "Grabado y corte",
         "emoji": "🔥",
         "intro": (
-            "🔥 **Grabado y corte láser** para crear detalles únicos con mucho sentimiento.\n\n"
+            "🔥 ✨Grabado y corte láser✨ para crear detalles únicos con mucho sentimiento.\n\n"
             "🌳 Trabajamos madera, vidrio, espejo, piedra y otros materiales.\n"
             "💝 Ideal para placas, recuerdos especiales, carteles, llaveros y regalos personalizados."
         ),
