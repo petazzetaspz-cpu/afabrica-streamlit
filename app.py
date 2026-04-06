@@ -242,7 +242,7 @@ def contact_item(kind: str, label: str, href: str) -> None:
     st.markdown(
         f"<a class='contact-item' href='{href}' target='_blank'>"
         f"<span class='cicon {kind}'>{icons[kind]}</span>"
-        f"<span class='contact-label'>{html.escape(label)}</span>"
+        f"<span>{html.escape(label)}</span>"
         f"</a>",
         unsafe_allow_html=True,
     )
