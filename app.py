@@ -51,8 +51,8 @@ SECTIONS = {
         "name": "Impresión",
         "emoji": "👕",
         "intro": (
-            "✨Vinilo, DTF y sublimación✨ para dar vida a ideas bonitas y súper especiales.\n\n"
-            "👚 Personalizamos camisetas, sudaderas, bodies, bolsas, tazas, termos y botellas.\n"
+            "✨<b>Vinilo, DTF y sublimación</b>✨ para dar vida a ideas bonitas y súper especiales.\n\n"
+            "👚 Personalizamos camisetas, sudaderas, bodies, bolsas, tazas, termos, botellas, etc.\n\n"
             "🎁 Ideal para regalos con nombre, detalles de bebé, fiestas, eventos y recuerdos únicos."
         ),
         "products": [
@@ -76,14 +76,14 @@ SECTIONS = {
         "name": "Bordado",
         "emoji": "🧵",
         "intro": (
-            "🧵 ✨Bordado en hilo✨ con un acabado bonito, elegante y duradero.\n\n"
-            "👚 Perfecto para nombres, iniciales y detalles especiales en prendas o complementos.\n"
-            "💰 El precio depende del tamaño del bordado, la complejidad y de si traes la prenda o la ponemos nosotros."
+            "🧵 ✨<b>Bordado en hilo</b>✨ con un acabado bonito, elegante y duradero.\n\n"
+            "👚 Perfecto para nombres, iniciales y detalles especiales en prendas o complementos.\n\n"
+            "ℹ️ El precio depende del tamaño del bordado, la complejidad y de si traes la prenda o la ponemos nosotros."
         ),
         "products": [
             ("Bordado pequeño", "Desde 5€", "🪡 Nombre o detalle sencillo", "bordado_objeto_bolsa_merienda_02.png"),
-            ("Bordado pequeño", "Desde 5€", "👕 Nombre bordado neceser", "bordado_objeto_bolsa_merienda_04.png"),
-            ("Camiseta nombre bordado", "Consultar", "🎁 Ideal para regalo", "bordado_objeto_camiseta_mascota_01.png"),
+            ("Bordado", "Desde 5€", "👕 Frase bordada", "bordado_objeto_bolsa_merienda_04.png"),
+            ("Camiseta nombre", "Consultar", "🎁 Ideal para regalo", "bordado_objeto_camiseta_mascota_01.png"),
             ("Pack padre e hija", "Consultar", "💞 Conjunto personalizado", "bordado_objeto_camiseta_padre_hija_01.png"),
         ],
         "gallery": [
@@ -91,12 +91,13 @@ SECTIONS = {
         ],
     },
     "grabado": {
-        "name": "Grabado y corte",
+        "name": "Grabado · Corte",
         "emoji": "🔥",
         "intro": (
-            "🔥 ✨Grabado y corte láser✨ para crear detalles únicos con mucho sentimiento.\n\n"
+            "🔥 ✨<b>Grabado · Corte láser</b>✨ para crear detalles únicos con mucho sentimiento.\n\n"
             "🌳 Trabajamos madera, vidrio, espejo, piedra y otros materiales.\n"
-            "💝 Ideal para placas, recuerdos especiales, carteles, llaveros y regalos personalizados."
+            "💝 Ideal para placas, recuerdos especiales, carteles, llaveros y regalos personalizados.\n\n"
+            "ℹ️Consúltanos para otras medidas o formas."
         ),
         "products": [
             ("Grabado en madera 12 cm", "12€", "🪵 Circular con soporte", "grabado_objeto_circulo_03.png"),
@@ -396,14 +397,14 @@ with st.sidebar:
         set_page("Catálogo · Impresión")
     if st.button("🧵 Bordado", use_container_width=True):
         set_page("Catálogo · Bordado")
-    if st.button("🔥 Grabado / Corte", use_container_width=True):
+    if st.button("🔥 Grabado · Corte", use_container_width=True):
         set_page("Catálogo · Grabado")
     st.markdown("<div class='sidebar-group'>Galería</div>", unsafe_allow_html=True)
-    if st.button("📒 Impresión", use_container_width=True):
+    if st.button("🔍 Impresión", use_container_width=True):
         set_page("Galería · Impresión")
-    if st.button("📒 Bordado", use_container_width=True):
+    if st.button("🔍 Bordado", use_container_width=True):
         set_page("Galería · Bordado")
-    if st.button("📒 Grabado", use_container_width=True):
+    if st.button("🔍 Grabado", use_container_width=True):
         set_page("Galería · Grabado")
     st.markdown("<div class='sidebar-group'>Contacto</div>", unsafe_allow_html=True)
     if st.button("📲 Contáctanos", use_container_width=True):
@@ -452,7 +453,7 @@ if page == "Inicio":
         )
         st.markdown("<div style='height:.8rem'></div>", unsafe_allow_html=True)
         st.markdown(
-            "<div class='events-text'>Además, ofrecemos precios especiales para pedidos grandes, perfectos para grupos, asociaciones o eventos 🎁</div>",
+            "<div class='events-text'>ℹ️ Ofrecemos precios especiales para pedidos grandes, perfectos para grupos, asociaciones o eventos 🎁</div>",
             unsafe_allow_html=True,
         )
         st.markdown("</div>", unsafe_allow_html=True)
