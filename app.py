@@ -243,7 +243,7 @@ def contact_icon_uri(kind: str) -> str | None:
     return None
 
 def contact_item(kind: str, label: str, href: str) -> None:
-    icons = {
+    fallback_icons = {
         "whatsapp": "💬",
         "instagram": "📸",
         "phone": "📞",
@@ -252,6 +252,12 @@ def contact_item(kind: str, label: str, href: str) -> None:
 
     safe_href = html.escape(href, quote=True)
     safe_label = html.escape(label)
+
+    icon_uri = contact_icon_uri(kind)
+    if icon_uri:
+        icon_html = f"<img src=\"{icon_uri}\" alt=\"{html.escape(kind)} icon\">"
+    else:
+        icon_html = html.escape(fallback_icons[kind])
 
     target_attr = ""
     rel_attr = ""
@@ -262,7 +268,7 @@ def contact_item(kind: str, label: str, href: str) -> None:
     st.markdown(
         f"""
         <div class="contact-item">
-            <span class="cicon {kind}">{icons[kind]}</span>
+            <span class="cicon {kind}">{icon_html}</span>
             <a class="contact-label" href="{safe_href}"{target_attr}{rel_attr}>{safe_label}</a>
         </div>
         """,
