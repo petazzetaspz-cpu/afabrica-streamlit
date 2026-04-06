@@ -181,7 +181,7 @@ def product_card(section: str, item, index: int) -> None:
     name, price, desc, image = item
     st.markdown("<div class='product-card'>", unsafe_allow_html=True)
     safe_image(
-        resolve_section_image("Cátalogo", section, image, fallback_index=index),
+        resolve_section_image("Catálogo", section, image, fallback_index=index),
         missing_text=f"No encuentro imagen para {name}",
     )
     st.markdown(
@@ -281,7 +281,7 @@ st.markdown(
 html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 .stApp {{ background: {COLORS['bg']}; }}
 .main .block-container {{ max-width: 1180px; padding-top: .15rem; padding-bottom: 4rem; }}
-#MainMenu, footer, [data-testid="stStatusWidget"], [data-testid="stDecoration"], [data-testid="stSidebarNav"] {{ display:none !important; }}
+#MainMenú, footer, [data-testid="stStatusWidget"], [data-testid="stDecoration"], [data-testid="stSidebarNav"] {{ display:none !important; }}
 .logo-wrap {{ text-align:center; margin: .1rem 0 .45rem 0; }}
 .topbar {{ width:100%; margin:.35rem 0 1rem 0; height:42px; border-radius:999px; border:1px solid {COLORS['line']}; background:linear-gradient(180deg, rgba(242,153,181,.18) 0%, rgba(245,220,158,.18) 18%, rgba(189,231,220,.18) 36%, rgba(201,192,202,.16) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%), #fff; }}
 .panelbar {{ width:100%; margin: 1.25rem 0 1rem 0; height:42px; border-radius:999px; border:1px solid {COLORS['line']}; background:linear-gradient(180deg, rgba(242,153,181,.18) 0%, rgba(245,220,158,.18) 18%, rgba(189,231,220,.18) 36%, rgba(201,192,202,.16) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%), #fff; }}
@@ -303,25 +303,47 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 .cicon.phone {{ background:#EEF3FF; }}
 .cicon.mail {{ background:#FFF6E2; }}
 [data-testid="stSidebar"] {{ background:#fff; border-right:1px solid {COLORS['line']}; }}
-[data-testid="collapsedControl"] {{ display:block !important; position:fixed !important; top:14px; left:14px; z-index:1001; }}
+[data-testid="collapsedControl"] {{
+    display:block !important;
+    position:fixed !important;
+    top:14px;
+    left:14px;
+    z-index:1001;
+}}
+
 [data-testid="collapsedControl"] button {{
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
     background:#fff7ea !important;
     border:2px solid #e7cfa8 !important;
     border-radius:18px !important;
-    width:58px !important;
-    height:58px !important;
+    min-width:110px !important;
+    height:52px !important;
+    padding:0 14px !important;
     box-shadow:0 10px 24px rgba(0,0,0,.14) !important;
-    transition:all .18s ease !important;
 }}
+
 [data-testid="collapsedControl"] button:hover {{
     background:#ffeecf !important;
     border-color:#dcb677 !important;
-    transform:scale(1.04);
 }}
-[data-testid="collapsedControl"] svg {{ width:28px !important; height:28px !important; }}
-[data-testid="collapsedControl"] svg path {{
-    fill:#8f6b2d !important;
+
+[data-testid="collapsedControl"] svg {{
+    width:26px !important;
+    height:26px !important;
+    flex:0 0 auto !important;
 }}
+
+[data-testid="collapsedControl"] button::after {{
+    content:"Menú";
+    font-size:18px;
+    font-weight:700;
+    color:#4e4e4e;
+    line-height:1;
+}}
+
+
 .sidebar-title {{ font-weight:800; margin:.25rem 0 .75rem 0; color:#4e4e4e; }}
 .sidebar-group {{ font-size:.92rem; font-weight:800; color:#7b7b7b; margin:1rem 0 .35rem 0; text-transform:uppercase; letter-spacing:.04em; }}
 .stButton > button {{ width:100%; border-radius:14px; border:1px solid {COLORS['line']}; background:#fff; color:{COLORS['text']}; text-align:left; font-weight:600; }}
@@ -341,13 +363,13 @@ with st.sidebar:
         set_page("Inicio")
     if st.button("🎉 Eventos", use_container_width=True):
         set_page("Eventos")
-    st.markdown("<div class='sidebar-group'>Cátalogo</div>", unsafe_allow_html=True)
+    st.markdown("<div class='sidebar-group'>Catálogo</div>", unsafe_allow_html=True)
     if st.button("👕 Impresión", use_container_width=True):
-        set_page("Cátalogo · Impresión")
+        set_page("Catálogo · Impresión")
     if st.button("🧵 Bordado", use_container_width=True):
-        set_page("Cátalogo · Bordado")
+        set_page("Catálogo · Bordado")
     if st.button("🔥 Grabado / Corte", use_container_width=True):
-        set_page("Cátalogo · Grabado")
+        set_page("Catálogo · Grabado")
     st.markdown("<div class='sidebar-group'>Galería</div>", unsafe_allow_html=True)
     if st.button("📒 Impresión", use_container_width=True):
         set_page("Galería · Impresión")
@@ -419,11 +441,11 @@ elif page == "Eventos":
     st.markdown("</div>", unsafe_allow_html=True)
     st.image(str(EVENT), use_container_width=True)
 
-elif page == "Cátalogo · Impresión":
+elif page == "Catálogo · Impresión":
     render_products("impresion")
-elif page == "Cátalogo · Bordado":
+elif page == "Catálogo · Bordado":
     render_products("bordado")
-elif page == "Cátalogo · Grabado":
+elif page == "Catálogo · Grabado":
     render_products("grabado")
 elif page == "Galería · Impresión":
     render_gallery("impresion")
