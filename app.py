@@ -241,11 +241,16 @@ def contact_item(kind: str, label: str, href: str) -> None:
         "mail": "✉️",
     }
 
+    safe_href = html.escape(href, quote=True)
+    safe_label = html.escape(label)
+
     st.markdown(
-        f"<a class='contact-item' href='{href}' target='_blank'>"
-        f"<span class='cicon {kind}'>{icons[kind]}</span>"
-        f"<span>{html.escape(label)}</span>"
-        f"</a>",
+        f"""
+        <div class="contact-item">
+            <span class="cicon {kind}">{icons[kind]}</span>
+            <a class="contact-label" href="{safe_href}" target="_blank" rel="noopener noreferrer">{safe_label}</a>
+        </div>
+        """,
         unsafe_allow_html=True,
     )
 
@@ -295,7 +300,9 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 .product-desc {{ color:{COLORS['muted']}; font-size:.95rem; margin-top:.35rem; min-height:42px; }}
 .stLinkButton > a {{ background:{COLORS['blue_baby']} !important; color:#16314b !important; border:1px solid #c7ddf7 !important; border-radius:16px !important; font-weight:700 !important; }}
 .stLinkButton > a:hover {{ background:#dcedff !important; }}
-.contact-item {{ display:flex; align-items:center; gap:.8rem; text-decoration:none; color:{COLORS['text']} !important; border:1px solid {COLORS['line']}; border-radius:18px; background:#fff; padding:.95rem 1rem; margin-bottom:.8rem; }}
+.contact-item {{ display:flex; align-items:center; gap:.8rem; border:1px solid {COLORS['line']}; border-radius:18px; background:#fff; padding:.95rem 1rem; margin-bottom:.8rem; width:100%; box-sizing:border-box; }}
+.contact-label {{ flex:1 1 auto; min-width:0; color:{COLORS['text']} !important; text-decoration:underline; font-size:1.04rem; line-height:1.35; overflow-wrap:anywhere; word-break:break-word; }}
+.contact-label:hover {{ color:#111 !important; }}
 .cicon {{ width:42px; height:42px; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; font-size:20px; flex:0 0 42px; }}
 .cicon img {{ width:24px; height:24px; object-fit:contain; display:block; }}
 .cicon.whatsapp {{ background:#EAF9F0; }}
