@@ -5,6 +5,8 @@ import base64
 import re
 import streamlit as st
 
+st.set_option("client.toolbarMode", "minimal")
+
 st.set_page_config(
     page_title="A fábrica das ideas",
     page_icon="💡",
