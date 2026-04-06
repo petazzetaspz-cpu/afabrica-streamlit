@@ -163,6 +163,15 @@ def wa_url(message: str) -> str:
     return f"https://wa.me/{BUSINESS['phone_raw']}?text={quote(message)}"
 
 
+def gmail_url(subject: str = "", body: str = "") -> str:
+    return (
+        "https://mail.google.com/mail/?view=cm&fs=1"
+        f"&to={quote(BUSINESS['email'])}"
+        f"&su={quote(subject)}"
+        f"&body={quote(body)}"
+    )
+
+
 def section_badge(text: str, color: str) -> None:
     st.markdown(
         f"<div class='section-badge' style='background:{color}'>{html.escape(text)}</div>",
@@ -244,11 +253,17 @@ def contact_item(kind: str, label: str, href: str) -> None:
     safe_href = html.escape(href, quote=True)
     safe_label = html.escape(label)
 
+    target_attr = ""
+    rel_attr = ""
+    if href.startswith(("http://", "https://")):
+        target_attr = " target=\"_blank\""
+        rel_attr = " rel=\"noopener noreferrer\""
+
     st.markdown(
         f"""
         <div class="contact-item">
             <span class="cicon {kind}">{icons[kind]}</span>
-            <a class="contact-label" href="{safe_href}" target="_blank" rel="noopener noreferrer">{safe_label}</a>
+            <a class="contact-label" href="{safe_href}"{target_attr}{rel_attr}>{safe_label}</a>
         </div>
         """,
         unsafe_allow_html=True,
@@ -466,5 +481,12 @@ elif page == "Contacto":
     contact_item("whatsapp", BUSINESS["phone_display"], wa_url("Hola 😊 Quiero información sobre vuestras personalizaciones."))
     contact_item("phone", BUSINESS["phone_display"], f"tel:+{BUSINESS['phone_raw']}")
     contact_item("instagram", f"@{BUSINESS['instagram_user']}", BUSINESS["instagram_url"])
-    contact_item("mail", BUSINESS["email"], f"mailto:{BUSINESS['email']}")
+    contact_item(
+        "mail",
+        BUSINESS["email"],
+        gmail_url(
+            "Consulta desde la web",
+            "Hola 😊 Quiero información sobre vuestras personalizaciones.",
+        ),
+    )
     st.markdown("</div>", unsafe_allow_html=True)
