@@ -232,26 +232,20 @@ def contact_icon_uri(kind: str) -> str | None:
     return None
 
 def contact_item(kind: str, label: str, href: str) -> None:
-    fallback_icons = {
+    icons = {
         "whatsapp": "💬",
         "instagram": "📸",
         "phone": "📞",
         "mail": "✉️",
     }
 
-    icon_uri = contact_icon_uri(kind)
-
-    if icon_uri:
-        icon_html = f"<span class='cicon {kind}'><img src='{icon_uri}' alt='{kind}'></span>"
-    else:
-        icon_html = f"<span class='cicon {kind}'>{fallback_icons[kind]}</span>"
-
     st.markdown(
         f"<a class='contact-item' href='{href}' target='_blank'>"
-        f"{icon_html}<span>{html.escape(label)}</span></a>",
+        f"<span class='cicon {kind}'>{icons[kind]}</span>"
+        f"<span class='contact-label'>{html.escape(label)}</span>"
+        f"</a>",
         unsafe_allow_html=True,
     )
-
 
 def set_page(page: str):
     st.session_state["page"] = page
