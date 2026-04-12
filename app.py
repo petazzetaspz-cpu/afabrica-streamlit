@@ -43,7 +43,7 @@ SECTION_COLORS = {
 
 LOGO = ASSETS / "logo" / "logo_principal.png"
 HERO = ASSETS / "portada" / "portada_manuel.png"
-EVENT = ASSETS / "eventos" / "evento_camisetas_01.png"
+EVENTS_FOLDER = ASSETS / "eventos"
 
 
 SECTIONS = {
@@ -216,6 +216,34 @@ def gallery_grid(section: str) -> None:
     for i, path in enumerate(images):
         with cols[i % 3]:
             st.image(str(path), use_container_width=True)
+
+
+def events_grid() -> None:
+    images = []
+    if EVENTS_FOLDER.exists():
+        images = sorted(
+            [p for p in EVENTS_FOLDER.rglob("*") if is_image_file(p)],
+            key=lambda p: p.name.lower(),
+        )
+
+    if not images:
+        st.info("Todavía no hay imágenes en Eventos.")
+        return
+
+    cols = st.columns(3, gap="medium")
+    for i, path in enumerate(images):
+        with cols[i % 3]:
+            st.image(str(path), use_container_width=True)
+
+
+def first_event_image() -> Path | None:
+    if not EVENTS_FOLDER.exists():
+        return None
+    images = sorted(
+        [p for p in EVENTS_FOLDER.rglob("*") if is_image_file(p)],
+        key=lambda p: p.name.lower(),
+    )
+    return images[0] if images else None
 
 
 def contact_icon_uri(kind: str) -> str | None:
@@ -458,7 +486,7 @@ if page == "Inicio":
         )
         st.markdown("</div>", unsafe_allow_html=True)
     with col_img:
-        st.image(str(EVENT), use_container_width=True)
+        safe_image(first_event_image(), missing_text="No hay imágenes de eventos todavía.")
 
 elif page == "Eventos":
     st.markdown("<div class='page-box'>", unsafe_allow_html=True)
@@ -468,7 +496,7 @@ elif page == "Eventos":
         unsafe_allow_html=True,
     )
     st.markdown("</div>", unsafe_allow_html=True)
-    st.image(str(EVENT), use_container_width=True)
+    events_grid()
 
 elif page == "Catálogo · Impresión":
     render_products("impresion")
