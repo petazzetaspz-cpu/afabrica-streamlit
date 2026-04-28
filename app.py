@@ -65,7 +65,7 @@ SECTIONS = {
             ("Termo personalizado", "13,90€", "🥤 Acero inox 500 ml", "impresion_objeto_botella_04.png"),
             ("Tote bag personalizada", "8€", "🎀 Ideal para para ti o para regalar", "impresion_objeto_totebag_01.png"),
             ("Tote bag bebé", "8€", "👶 Medida 33x40cm", "impresion_bebe_totebag_03.png"),
-            ("Lámpara metracrilato LED 20.5x13.5", "17€", "💡 Fondo transparente o a color", "impresion_objeto_lámpara_01.png"),
+            ("Lámpara metacrilato LED 20.5x13.5", "17€", "💡 Fondo transparente o a color", "impresion_objeto_lámpara_01.png"),
         ],
         "gallery": [
             "Camisetas fiesta tematica.jpeg", "IMG-20250906-WA0010.jpg", "IMG-20250906-WA0021.jpg",
