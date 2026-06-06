@@ -69,7 +69,7 @@ SECTIONS = {
             ("Lámpara metacrilato LED 20,5x13,5", "17€", "💡 Fondo color", "impresion_objeto_lámpara_01.png"),
             ("Lámpara metacrilato LED 20,5x13,5", "17€", "💡 Fondo transparente", "impresion_objeto_lámpara_02.png"),
         ],  
-        "gallery": [    impresion_objeto_taza_00.jpeg
+        "gallery": [   
             "Camisetas fiesta tematica.jpeg", "IMG-20250906-WA0010.jpg", "IMG-20250906-WA0021.jpg",
             "IMG-20250906-WA0030.jpg", "IMG-20250906-WA0031.jpg", "casco Carla fg.jpg",
             "WhatsApp Image 2026-03-27 at 22.02.25 (3).jpeg"
