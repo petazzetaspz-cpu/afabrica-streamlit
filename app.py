@@ -61,14 +61,15 @@ SECTIONS = {
             ("Botella", "8,50€", "🧒 Aluminio 550 ml", "impresion_nenes_botella_01.png"),
             ("Camiseta personalizada", "Desde 12€", "👕 Niños 12€ · Adultos 15€", "impresion_nenes_camiseta_04.png"),
             ("Sudadera personalizada", "22€", "❤️ A tu gusto", "impresion_zadultos_sudadera_02.png"),
-            ("Taza personalizada", "9€", "☕ Con foto, nombre o diseño especial", "impresion_objeto_taza_01.png"),
+            ("Taza personalizada", "9€", "☕ Diseño en 1 o 2 caras, con foto, nombre o diseño especial", "impresion_objeto_taza_01.png"),
+            ("Taza personalizada 360°", "12€", "☕ Fotos, frases, canciones o ilustraciones completas", "impresion_objeto_taza_00.jpeg"),
             ("Termo personalizado", "13,90€", "🥤 Acero inox 500 ml", "impresion_objeto_botella_04.png"),
             ("Tote bag personalizada", "8€", "🎀 Ideal para para ti o para regalar", "impresion_objeto_totebag_01.png"),
             ("Tote bag bebé", "8€", "👶 Medida 33x40cm", "impresion_bebe_totebag_03.png"),
             ("Lámpara metacrilato LED 20,5x13,5", "17€", "💡 Fondo color", "impresion_objeto_lámpara_01.png"),
             ("Lámpara metacrilato LED 20,5x13,5", "17€", "💡 Fondo transparente", "impresion_objeto_lámpara_02.png"),
-        ],
-        "gallery": [
+        ],  
+        "gallery": [    impresion_objeto_taza_00.jpeg
             "Camisetas fiesta tematica.jpeg", "IMG-20250906-WA0010.jpg", "IMG-20250906-WA0021.jpg",
             "IMG-20250906-WA0030.jpg", "IMG-20250906-WA0031.jpg", "casco Carla fg.jpg",
             "WhatsApp Image 2026-03-27 at 22.02.25 (3).jpeg"
