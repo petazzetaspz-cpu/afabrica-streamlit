@@ -68,6 +68,7 @@ SECTIONS = {
             ("Tote bag bebé", "8€", "👶 Medida 33x40cm", "impresion_bebe_totebag_03.png"),
             ("Lámpara metacrilato LED 20,5x13,5", "17€", "💡 Fondo color", "impresion_objeto_lámpara_01.png"),
             ("Lámpara metacrilato LED 20,5x13,5", "17€", "💡 Fondo transparente", "impresion_objeto_lámpara_02.png"),
+            ("Lámpara metacrilato LED 20,5x13,5", "17€", "💡 Fondo color", "impresion_objeto_lámpara_03.png"),
         ],  
         "gallery": [   
             "Camisetas fiesta tematica.jpeg", "IMG-20250906-WA0010.jpg", "IMG-20250906-WA0021.jpg",
