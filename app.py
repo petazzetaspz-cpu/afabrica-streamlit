@@ -104,7 +104,7 @@ SECTIONS = {
             "ℹ️Consúltanos para otras medidas o formas."
         ),
         "products": [
-            ("Percha personalizada", "5€", "🥰 Para momentos inolvidables", "grabado_percha_02.png")
+            ("Percha personalizada", "5€", "🥰 Para momentos inolvidables" "grabado_percha_02.png"),
            ("Percha personalizada con corte", "8,50€", "💕 Un recuerdo único para conservar siempre", "grabado_percha_03.png"),
             ("Grabado en madera 12 cm", "12€", "🪵 Circular con soporte", "grabado_objeto_circulo_03.png"),
             ("Grabado en madera 16 cm", "16€", "🪵 Circular con soporte", "grabado_objeto_circulo_02.png"),
