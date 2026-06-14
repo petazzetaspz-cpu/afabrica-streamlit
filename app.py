@@ -356,8 +356,6 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 .product-desc {{ color:{COLORS['muted']}; font-size:.95rem; margin-top:.35rem; min-height:42px; }}
 .stLinkButton > a {{ background:{COLORS['blue_baby']} !important; color:#16314b !important; border:1px solid #c7ddf7 !important; border-radius:16px !important; font-weight:700 !important; }}
 .stLinkButton > a:hover {{ background:#dcedff !important; }}
-.stButton > button[kind="primary"] {{ background:#fff7ea !important; border:2px solid #e7cfa8 !important; border-radius:18px !important; min-height:52px !important; color:#4e4e4e !important; font-weight:800 !important; box-shadow:0 10px 24px rgba(0,0,0,.10) !important; text-align:center !important; }}
-.stButton > button[kind="primary"]:hover {{ background:#ffeecf !important; border-color:#dcb677 !important; }}
 .contact-item {{ display:flex; align-items:center; gap:.8rem; border:1px solid {COLORS['line']}; border-radius:18px; background:#fff; padding:.95rem 1rem; margin-bottom:.8rem; width:100%; box-sizing:border-box; }}
 .contact-label {{ flex:1 1 auto; min-width:0; color:{COLORS['text']} !important; text-decoration:underline; font-size:1.04rem; line-height:1.35; overflow-wrap:anywhere; word-break:break-word; }}
 .contact-label:hover {{ color:#111 !important; }}
@@ -370,12 +368,47 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 [data-testid="stSidebar"],
 [data-testid="collapsedControl"],
 [data-testid="stSidebarCollapseButton"] {{ display:none !important; }}
-.menu-panel {{ background:#fffaf1; border:1px solid #ead8bf; border-radius:24px; padding:1rem; margin: .5rem 0 1rem 0; box-shadow:0 10px 24px rgba(0,0,0,.06); }}
-.menu-panel-title {{ font-weight:800; margin:.1rem 0 .75rem 0; color:#4e4e4e; font-size:1.2rem; }}
 .menu-group {{ font-size:.92rem; font-weight:800; color:#7b7b7b; margin:1rem 0 .35rem 0; text-transform:uppercase; letter-spacing:.04em; }}
-.stButton > button {{ width:100%; border-radius:14px; border:1px solid {COLORS['line']}; background:#fff; color:{COLORS['text']}; text-align:left; font-weight:600; }}
-.stButton > button:hover {{ border-color:#dacfc8; color:#111; }}
-@media (max-width: 820px) {{ .panelbar {{height:36px;}} }}
+.menu-popover-wrap {{ display:flex; justify-content:flex-start; margin:.35rem 0 .35rem 0; }}
+.menu-popover-wrap [data-testid="stPopover"] > button {{
+    background:#fff7ea !important;
+    border:2px solid #e7cfa8 !important;
+    border-radius:16px !important;
+    min-height:42px !important;
+    padding:0 .85rem !important;
+    color:#4e4e4e !important;
+    font-weight:800 !important;
+    box-shadow:0 8px 18px rgba(0,0,0,.08) !important;
+    width:auto !important;
+}}
+.menu-popover-wrap [data-testid="stPopover"] > button:hover {{
+    background:#ffeecf !important;
+    border-color:#dcb677 !important;
+}}
+.menu-popover-wrap [data-testid="stPopover"] > button p {{
+    font-size:1rem !important;
+}}
+.menu-popover-box {{ min-width:250px; }}
+.menu-popover-box .stButton > button {{
+    width:100%;
+    border-radius:14px;
+    border:1px solid {COLORS['line']};
+    background:#fff;
+    color:{COLORS['text']};
+    text-align:left;
+    font-weight:600;
+}}
+.menu-popover-box .stButton > button:hover {{ border-color:#dacfc8; color:#111; }}
+@media (max-width: 820px) {{
+    .panelbar {{height:36px;}}
+    .menu-popover-wrap [data-testid="stPopover"] > button {{
+        min-height:38px !important;
+        padding:0 .75rem !important;
+        border-radius:14px !important;
+    }}
+    .menu-popover-wrap [data-testid="stPopover"] > button p {{ font-size:.95rem !important; }}
+    .menu-popover-box {{ min-width:220px; }}
+}}
 </style>
 """,
     unsafe_allow_html=True,
@@ -387,38 +420,30 @@ if "page" not in st.session_state:
 def nav_button(label: str, target: str, key: str) -> None:
     if st.button(label, key=key, use_container_width=True):
         st.session_state["page"] = target
-        st.session_state["menu_open"] = False
         st.rerun()
 
 
-if "menu_open" not in st.session_state:
-    st.session_state["menu_open"] = False
-
-menu_row = st.columns([0.22, 0.78])
+menu_row = st.columns([0.16, 0.84])
 with menu_row[0]:
-    if st.button("« Menú", key="menu_toggle", type="primary", use_container_width=True):
-        st.session_state["menu_open"] = not st.session_state["menu_open"]
-        st.rerun()
+    st.markdown("<div class='menu-popover-wrap'>", unsafe_allow_html=True)
+    with st.popover("« Menú", use_container_width=False):
+        st.markdown("<div class='menu-popover-box'>", unsafe_allow_html=True)
+        nav_button("🏠 Inicio", "Inicio", "nav_inicio")
+        nav_button("🎉 Eventos", "Eventos", "nav_eventos")
 
-if st.session_state["menu_open"]:
-    st.markdown("<div class='menu-panel'>", unsafe_allow_html=True)
-    st.markdown("<div class='menu-panel-title'>Menú</div>", unsafe_allow_html=True)
+        st.markdown("<div class='menu-group'>Catálogo</div>", unsafe_allow_html=True)
+        nav_button("👕 Impresión", "Catálogo · Impresión", "nav_cat_impresion")
+        nav_button("🧵 Bordado", "Catálogo · Bordado", "nav_cat_bordado")
+        nav_button("🔥 Grabado · Corte", "Catálogo · Grabado", "nav_cat_grabado")
 
-    nav_button("🏠 Inicio", "Inicio", "nav_inicio")
-    nav_button("🎉 Eventos", "Eventos", "nav_eventos")
+        st.markdown("<div class='menu-group'>Galería</div>", unsafe_allow_html=True)
+        nav_button("🔍 Impresión", "Galería · Impresión", "nav_gal_impresion")
+        nav_button("🔍 Bordado", "Galería · Bordado", "nav_gal_bordado")
+        nav_button("🔍 Grabado", "Galería · Grabado", "nav_gal_grabado")
 
-    st.markdown("<div class='menu-group'>Catálogo</div>", unsafe_allow_html=True)
-    nav_button("👕 Impresión", "Catálogo · Impresión", "nav_cat_impresion")
-    nav_button("🧵 Bordado", "Catálogo · Bordado", "nav_cat_bordado")
-    nav_button("🔥 Grabado · Corte", "Catálogo · Grabado", "nav_cat_grabado")
-
-    st.markdown("<div class='menu-group'>Galería</div>", unsafe_allow_html=True)
-    nav_button("🔍 Impresión", "Galería · Impresión", "nav_gal_impresion")
-    nav_button("🔍 Bordado", "Galería · Bordado", "nav_gal_bordado")
-    nav_button("🔍 Grabado", "Galería · Grabado", "nav_gal_grabado")
-
-    st.markdown("<div class='menu-group'>Contacto</div>", unsafe_allow_html=True)
-    nav_button("📲 Contáctanos", "Contacto", "nav_contacto")
+        st.markdown("<div class='menu-group'>Contacto</div>", unsafe_allow_html=True)
+        nav_button("📲 Contáctanos", "Contacto", "nav_contacto")
+        st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 logo_c1, logo_c2, logo_c3 = st.columns([0.18, 0.64, 0.18])
