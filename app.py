@@ -366,9 +366,8 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 .cicon.phone {{ background:#EEF3FF; }}
 .cicon.mail {{ background:#FFF6E2; }}
 [data-testid="stSidebar"] {{ background:#fff; border-right:1px solid {COLORS['line']}; }}
-/* Botón de abrir/cerrar sidebar: válido fuera y dentro */
-[data-testid="collapsedControl"],
-[data-testid="stSidebarCollapseButton"] {{
+/* Botón interno de cerrar la sidebar: sin texto */
+[data-testid="collapsedControl"] {{
     display:block !important;
     position:fixed !important;
     top:14px;
@@ -376,42 +375,65 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
     z-index:1001;
 }}
 
-[data-testid="collapsedControl"] button,
-[data-testid="stSidebarCollapseButton"] button {{
+[data-testid="collapsedControl"] button {{
     display:flex !important;
     align-items:center !important;
-    gap:8px !important;
+    justify-content:center !important;
+    gap:0 !important;
     background:#fff7ea !important;
     border:2px solid #e7cfa8 !important;
     border-radius:18px !important;
-    min-width:110px !important;
+    width:52px !important;
+    min-width:52px !important;
     height:52px !important;
-    padding:0 14px !important;
+    padding:0 !important;
     box-shadow:0 10px 24px rgba(0,0,0,.14) !important;
 }}
 
-[data-testid="collapsedControl"] button:hover,
-[data-testid="stSidebarCollapseButton"] button:hover {{
+[data-testid="collapsedControl"] button:hover {{
     background:#ffeecf !important;
     border-color:#dcb677 !important;
 }}
 
-[data-testid="collapsedControl"] svg,
-[data-testid="stSidebarCollapseButton"] svg {{
+[data-testid="collapsedControl"] svg {{
     width:26px !important;
     height:26px !important;
     flex:0 0 auto !important;
 }}
 
-[data-testid="collapsedControl"] button::after,
-[data-testid="stSidebarCollapseButton"] button::after {{
-    content:"Menú";
-    font-size:18px;
-    font-weight:700;
+[data-testid="collapsedControl"] button::after {{
+    content:"" !important;
+}}
+
+/* Etiqueta fija fuera, al lado de la flecha cuando la web está cerrada */
+.menu-outside-label {{
+    position:fixed;
+    top:22px;
+    left:58px;
+    z-index:999;
+    pointer-events:none;
+    display:inline-flex;
+    align-items:center;
+    height:32px;
+    padding:0 10px;
+    border-radius:999px;
+    background:rgba(255, 247, 234, 0.96);
+    border:1px solid #e7cfa8;
     color:#4e4e4e;
+    font-size:16px;
+    font-weight:700;
     line-height:1;
-    margin-left:4px;
-    white-space:nowrap;
+    box-shadow:0 6px 16px rgba(0,0,0,.08);
+}}
+
+@media (max-width: 820px) {{
+    .menu-outside-label {{
+        top:16px;
+        left:52px;
+        height:30px;
+        padding:0 9px;
+        font-size:15px;
+    }}
 }}
 
 
@@ -424,6 +446,9 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 """,
     unsafe_allow_html=True,
 )
+
+# Etiqueta visual al lado de la flecha exterior
+st.markdown("<div class='menu-outside-label'>Menú</div>", unsafe_allow_html=True)
 
 if "page" not in st.session_state:
     st.session_state["page"] = "Inicio"
