@@ -356,8 +356,8 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 .product-desc {{ color:{COLORS['muted']}; font-size:.95rem; margin-top:.35rem; min-height:42px; }}
 .stLinkButton > a {{ background:{COLORS['blue_baby']} !important; color:#16314b !important; border:1px solid #c7ddf7 !important; border-radius:16px !important; font-weight:700 !important; }}
 .stLinkButton > a:hover {{ background:#dcedff !important; }}
-.stButton > button[kind="primary"] { background:#fff7ea !important; border:2px solid #e7cfa8 !important; border-radius:18px !important; min-height:52px !important; color:#4e4e4e !important; font-weight:800 !important; box-shadow:0 10px 24px rgba(0,0,0,.10) !important; text-align:center !important; }
-.stButton > button[kind="primary"]:hover { background:#ffeecf !important; border-color:#dcb677 !important; }
+.stButton > button[kind="primary"] {{ background:#fff7ea !important; border:2px solid #e7cfa8 !important; border-radius:18px !important; min-height:52px !important; color:#4e4e4e !important; font-weight:800 !important; box-shadow:0 10px 24px rgba(0,0,0,.10) !important; text-align:center !important; }}
+.stButton > button[kind="primary"]:hover {{ background:#ffeecf !important; border-color:#dcb677 !important; }}
 .contact-item {{ display:flex; align-items:center; gap:.8rem; border:1px solid {COLORS['line']}; border-radius:18px; background:#fff; padding:.95rem 1rem; margin-bottom:.8rem; width:100%; box-sizing:border-box; }}
 .contact-label {{ flex:1 1 auto; min-width:0; color:{COLORS['text']} !important; text-decoration:underline; font-size:1.04rem; line-height:1.35; overflow-wrap:anywhere; word-break:break-word; }}
 .contact-label:hover {{ color:#111 !important; }}
