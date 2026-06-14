@@ -369,8 +369,8 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 [data-testid="collapsedControl"],
 [data-testid="stSidebarCollapseButton"] {{ display:none !important; }}
 .menu-group {{ font-size:.92rem; font-weight:800; color:#7b7b7b; margin:1rem 0 .35rem 0; text-transform:uppercase; letter-spacing:.04em; }}
-.menu-popover-wrap {{ display:flex; justify-content:flex-start; margin:.35rem 0 .35rem 0; }}
-.menu-popover-wrap [data-testid="stPopover"] > button {{
+.menu-toggle-wrap {{ display:flex; justify-content:flex-start; margin:.35rem 0 .35rem 0; }}
+.menu-toggle-wrap .stButton > button {{
     background:#fff7ea !important;
     border:2px solid #e7cfa8 !important;
     border-radius:16px !important;
@@ -381,15 +381,20 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
     box-shadow:0 8px 18px rgba(0,0,0,.08) !important;
     width:auto !important;
 }}
-.menu-popover-wrap [data-testid="stPopover"] > button:hover {{
+.menu-toggle-wrap .stButton > button:hover {{
     background:#ffeecf !important;
     border-color:#dcb677 !important;
 }}
-.menu-popover-wrap [data-testid="stPopover"] > button p {{
-    font-size:1rem !important;
+.menu-panel {{
+    background:#fff;
+    border:1px solid {COLORS['line']};
+    border-radius:24px;
+    padding:1rem;
+    box-shadow:0 10px 24px rgba(0,0,0,.05);
+    position:sticky;
+    top:1rem;
 }}
-.menu-popover-box {{ min-width:250px; }}
-.menu-popover-box .stButton > button {{
+.menu-panel .stButton > button {{
     width:100%;
     border-radius:14px;
     border:1px solid {COLORS['line']};
@@ -398,16 +403,15 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
     text-align:left;
     font-weight:600;
 }}
-.menu-popover-box .stButton > button:hover {{ border-color:#dacfc8; color:#111; }}
+.menu-panel .stButton > button:hover {{ border-color:#dacfc8; color:#111; }}
 @media (max-width: 820px) {{
     .panelbar {{height:36px;}}
-    .menu-popover-wrap [data-testid="stPopover"] > button {{
+    .menu-toggle-wrap .stButton > button {{
         min-height:38px !important;
         padding:0 .75rem !important;
         border-radius:14px !important;
     }}
-    .menu-popover-wrap [data-testid="stPopover"] > button p {{ font-size:.95rem !important; }}
-    .menu-popover-box {{ min-width:220px; }}
+    .menu-panel {{ padding:.85rem; border-radius:18px; }}
 }}
 </style>
 """,
@@ -416,120 +420,139 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 
 if "page" not in st.session_state:
     st.session_state["page"] = "Inicio"
+if "menu_open" not in st.session_state:
+    st.session_state["menu_open"] = False
+
+def set_page_and_close(page: str):
+    st.session_state["page"] = page
+    st.session_state["menu_open"] = False
+    st.rerun()
 
 def nav_button(label: str, target: str, key: str) -> None:
     if st.button(label, key=key, use_container_width=True):
-        st.session_state["page"] = target
+        set_page_and_close(target)
+
+def render_menu_panel() -> None:
+    st.markdown("<div class='menu-panel'>", unsafe_allow_html=True)
+    nav_button("🏠 Inicio", "Inicio", "nav_inicio")
+    nav_button("🎉 Eventos", "Eventos", "nav_eventos")
+
+    st.markdown("<div class='menu-group'>Catálogo</div>", unsafe_allow_html=True)
+    nav_button("👕 Impresión", "Catálogo · Impresión", "nav_cat_impresion")
+    nav_button("🧵 Bordado", "Catálogo · Bordado", "nav_cat_bordado")
+    nav_button("🔥 Grabado · Corte", "Catálogo · Grabado", "nav_cat_grabado")
+
+    st.markdown("<div class='menu-group'>Galería</div>", unsafe_allow_html=True)
+    nav_button("🔍 Impresión", "Galería · Impresión", "nav_gal_impresion")
+    nav_button("🔍 Bordado", "Galería · Bordado", "nav_gal_bordado")
+    nav_button("🔍 Grabado", "Galería · Grabado", "nav_gal_grabado")
+
+    st.markdown("<div class='menu-group'>Contacto</div>", unsafe_allow_html=True)
+    nav_button("📲 Contáctanos", "Contacto", "nav_contacto")
+    st.markdown("</div>", unsafe_allow_html=True)
+
+def render_page_content() -> None:
+    logo_c1, logo_c2, logo_c3 = st.columns([0.18, 0.64, 0.18])
+    with logo_c2:
+        st.image(str(LOGO), width=760)
+
+    st.markdown("<div class='topbar'></div>", unsafe_allow_html=True)
+
+    page = st.session_state["page"]
+
+    if page == "Inicio":
+        c1, c2 = st.columns([1.02, .98], gap="large")
+        with c1:
+            st.markdown("<div class='hero'>", unsafe_allow_html=True)
+            st.markdown(
+                "<div class='hero-text'>💛 <b>Diseño e impresión</b> donde las ideas se convierten en detalles únicos. Creamos regalos y personalizaciones con mimo para bebés, familias, eventos, recuerdos especiales y pequeños caprichos bonitos. ✨</div>",
+                unsafe_allow_html=True,
+            )
+            st.markdown("<div style='height:.8rem'></div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div class='hero-text'>🎁 Cada pedido se prepara con cariño, cuidando la imagen, el acabado y ese toque especial que hace que el regalo emocione de verdad.</div>",
+                unsafe_allow_html=True,
+            )
+            st.markdown("</div>", unsafe_allow_html=True)
+        with c2:
+            st.image(str(HERO), use_container_width=True)
+
+        st.markdown("<div class='panelbar'></div>", unsafe_allow_html=True)
+
+        col_text, col_img = st.columns([1.05, .95], gap="large")
+        with col_text:
+            st.markdown("<div class='events'>", unsafe_allow_html=True)
+            st.markdown("<div class='section-text'><b>🎉 ¿Buscas algo único para tu evento?</b> ✨</div>", unsafe_allow_html=True)
+            st.markdown("<div style='height:.6rem'></div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div class='events-text'>Realizamos impresiones personalizadas para todo tipo de ocasiones: 🎊 fiestas temáticas, 🎂 cumpleaños, 🥳 eventos especiales y 👕 celebraciones en grupo.</div>",
+                unsafe_allow_html=True,
+            )
+            st.markdown("<div style='height:.8rem'></div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div class='events-text'>Trabajamos con prendas, objetos y materiales distintos, adaptándonos a lo que necesites para que tu idea cobre vida 💫</div>",
+                unsafe_allow_html=True,
+            )
+            st.markdown("<div style='height:.8rem'></div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div class='events-text'>ℹ️ Ofrecemos precios especiales para pedidos grandes, perfectos para grupos, asociaciones o eventos 🎁</div>",
+                unsafe_allow_html=True,
+            )
+            st.markdown("</div>", unsafe_allow_html=True)
+        with col_img:
+            safe_image(first_event_image(), missing_text="No hay imágenes de eventos todavía.")
+
+    elif page == "Eventos":
+        st.markdown("<div class='page-box'>", unsafe_allow_html=True)
+        st.markdown("### 🎉 Eventos y pedidos especiales")
+        st.markdown(
+            "<div class='events-text'>Realizamos impresiones personalizadas para todo tipo de ocasiones: 🎊 fiestas temáticas, 🎂 cumpleaños, 🥳 eventos especiales y 👕 celebraciones en grupo.<br><br>Trabajamos con prendas, objetos y materiales distintos, adaptándonos a lo que necesites para que tu idea cobre vida 💫<br><br>Además, ofrecemos precios especiales para pedidos grandes, perfectos para grupos, asociaciones o eventos 🎁</div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown("</div>", unsafe_allow_html=True)
+        events_grid()
+
+    elif page == "Catálogo · Impresión":
+        render_products("impresion")
+    elif page == "Catálogo · Bordado":
+        render_products("bordado")
+    elif page == "Catálogo · Grabado":
+        render_products("grabado")
+    elif page == "Galería · Impresión":
+        render_gallery("impresion")
+    elif page == "Galería · Bordado":
+        render_gallery("bordado")
+    elif page == "Galería · Grabado":
+        render_gallery("grabado")
+    elif page == "Contacto":
+        st.markdown("<div class='contact-box'>", unsafe_allow_html=True)
+        st.markdown("### 📲 Contacto")
+        contact_item("whatsapp", BUSINESS["phone_display"], wa_url("Hola 😊 Quiero información sobre vuestras personalizaciones."))
+        contact_item("phone", BUSINESS["phone_display"], f"tel:+{BUSINESS['phone_raw']}")
+        contact_item("instagram", f"@{BUSINESS['instagram_user']}", BUSINESS["instagram_url"])
+        contact_item(
+            "mail",
+            BUSINESS["email"],
+            gmail_url(
+                "Consulta desde la web",
+                "Hola 😊 Quiero información sobre vuestras personalizaciones.",
+            ),
+        )
+        st.markdown("</div>", unsafe_allow_html=True)
+
+menu_top = st.columns([0.16, 0.84])
+with menu_top[0]:
+    st.markdown("<div class='menu-toggle-wrap'>", unsafe_allow_html=True)
+    if st.button("« Menú", key="toggle_menu"):
+        st.session_state["menu_open"] = not st.session_state["menu_open"]
         st.rerun()
-
-
-menu_row = st.columns([0.16, 0.84])
-with menu_row[0]:
-    st.markdown("<div class='menu-popover-wrap'>", unsafe_allow_html=True)
-    with st.popover("« Menú", use_container_width=False):
-        st.markdown("<div class='menu-popover-box'>", unsafe_allow_html=True)
-        nav_button("🏠 Inicio", "Inicio", "nav_inicio")
-        nav_button("🎉 Eventos", "Eventos", "nav_eventos")
-
-        st.markdown("<div class='menu-group'>Catálogo</div>", unsafe_allow_html=True)
-        nav_button("👕 Impresión", "Catálogo · Impresión", "nav_cat_impresion")
-        nav_button("🧵 Bordado", "Catálogo · Bordado", "nav_cat_bordado")
-        nav_button("🔥 Grabado · Corte", "Catálogo · Grabado", "nav_cat_grabado")
-
-        st.markdown("<div class='menu-group'>Galería</div>", unsafe_allow_html=True)
-        nav_button("🔍 Impresión", "Galería · Impresión", "nav_gal_impresion")
-        nav_button("🔍 Bordado", "Galería · Bordado", "nav_gal_bordado")
-        nav_button("🔍 Grabado", "Galería · Grabado", "nav_gal_grabado")
-
-        st.markdown("<div class='menu-group'>Contacto</div>", unsafe_allow_html=True)
-        nav_button("📲 Contáctanos", "Contacto", "nav_contacto")
-        st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-logo_c1, logo_c2, logo_c3 = st.columns([0.18, 0.64, 0.18])
-with logo_c2:
-    st.image(str(LOGO), width=760)
-
-st.markdown("<div class='topbar'></div>", unsafe_allow_html=True)
-
-page = st.session_state["page"]
-
-if page == "Inicio":
-    c1, c2 = st.columns([1.02, .98], gap="large")
-    with c1:
-        st.markdown("<div class='hero'>", unsafe_allow_html=True)
-        st.markdown(
-            "<div class='hero-text'>💛 <b>Diseño e impresión</b> donde las ideas se convierten en detalles únicos. Creamos regalos y personalizaciones con mimo para bebés, familias, eventos, recuerdos especiales y pequeños caprichos bonitos. ✨</div>",
-            unsafe_allow_html=True,
-        )
-        st.markdown("<div style='height:.8rem'></div>", unsafe_allow_html=True)
-        st.markdown(
-            "<div class='hero-text'>🎁 Cada pedido se prepara con cariño, cuidando la imagen, el acabado y ese toque especial que hace que el regalo emocione de verdad.</div>",
-            unsafe_allow_html=True,
-        )
-        st.markdown("</div>", unsafe_allow_html=True)
-    with c2:
-        st.image(str(HERO), use_container_width=True)
-
-    st.markdown("<div class='panelbar'></div>", unsafe_allow_html=True)
-
-    col_text, col_img = st.columns([1.05, .95], gap="large")
-    with col_text:
-        st.markdown("<div class='events'>", unsafe_allow_html=True)
-        st.markdown("<div class='section-text'><b>🎉 ¿Buscas algo único para tu evento?</b> ✨</div>", unsafe_allow_html=True)
-        st.markdown("<div style='height:.6rem'></div>", unsafe_allow_html=True)
-        st.markdown(
-            "<div class='events-text'>Realizamos impresiones personalizadas para todo tipo de ocasiones: 🎊 fiestas temáticas, 🎂 cumpleaños, 🥳 eventos especiales y 👕 celebraciones en grupo.</div>",
-            unsafe_allow_html=True,
-        )
-        st.markdown("<div style='height:.8rem'></div>", unsafe_allow_html=True)
-        st.markdown(
-            "<div class='events-text'>Trabajamos con prendas, objetos y materiales distintos, adaptándonos a lo que necesites para que tu idea cobre vida 💫</div>",
-            unsafe_allow_html=True,
-        )
-        st.markdown("<div style='height:.8rem'></div>", unsafe_allow_html=True)
-        st.markdown(
-            "<div class='events-text'>ℹ️ Ofrecemos precios especiales para pedidos grandes, perfectos para grupos, asociaciones o eventos 🎁</div>",
-            unsafe_allow_html=True,
-        )
-        st.markdown("</div>", unsafe_allow_html=True)
-    with col_img:
-        safe_image(first_event_image(), missing_text="No hay imágenes de eventos todavía.")
-
-elif page == "Eventos":
-    st.markdown("<div class='page-box'>", unsafe_allow_html=True)
-    st.markdown("### 🎉 Eventos y pedidos especiales")
-    st.markdown(
-        "<div class='events-text'>Realizamos impresiones personalizadas para todo tipo de ocasiones: 🎊 fiestas temáticas, 🎂 cumpleaños, 🥳 eventos especiales y 👕 celebraciones en grupo.<br><br>Trabajamos con prendas, objetos y materiales distintos, adaptándonos a lo que necesites para que tu idea cobre vida 💫<br><br>Además, ofrecemos precios especiales para pedidos grandes, perfectos para grupos, asociaciones o eventos 🎁</div>",
-        unsafe_allow_html=True,
-    )
-    st.markdown("</div>", unsafe_allow_html=True)
-    events_grid()
-
-elif page == "Catálogo · Impresión":
-    render_products("impresion")
-elif page == "Catálogo · Bordado":
-    render_products("bordado")
-elif page == "Catálogo · Grabado":
-    render_products("grabado")
-elif page == "Galería · Impresión":
-    render_gallery("impresion")
-elif page == "Galería · Bordado":
-    render_gallery("bordado")
-elif page == "Galería · Grabado":
-    render_gallery("grabado")
-elif page == "Contacto":
-    st.markdown("<div class='contact-box'>", unsafe_allow_html=True)
-    st.markdown("### 📲 Contacto")
-    contact_item("whatsapp", BUSINESS["phone_display"], wa_url("Hola 😊 Quiero información sobre vuestras personalizaciones."))
-    contact_item("phone", BUSINESS["phone_display"], f"tel:+{BUSINESS['phone_raw']}")
-    contact_item("instagram", f"@{BUSINESS['instagram_user']}", BUSINESS["instagram_url"])
-    contact_item(
-        "mail",
-        BUSINESS["email"],
-        gmail_url(
-            "Consulta desde la web",
-            "Hola 😊 Quiero información sobre vuestras personalizaciones.",
-        ),
-    )
-    st.markdown("</div>", unsafe_allow_html=True)
+if st.session_state["menu_open"]:
+    menu_col, content_col = st.columns([0.27, 0.73], gap="large")
+    with menu_col:
+        render_menu_panel()
+    with content_col:
+        render_page_content()
+else:
+    render_page_content()
