@@ -366,7 +366,9 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
 .cicon.phone {{ background:#EEF3FF; }}
 .cicon.mail {{ background:#FFF6E2; }}
 [data-testid="stSidebar"] {{ background:#fff; border-right:1px solid {COLORS['line']}; }}
-[data-testid="collapsedControl"] {{
+/* Botón de abrir/cerrar sidebar: válido fuera y dentro */
+[data-testid="collapsedControl"],
+[data-testid="stSidebarCollapseButton"] {{
     display:block !important;
     position:fixed !important;
     top:14px;
@@ -374,7 +376,8 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
     z-index:1001;
 }}
 
-[data-testid="collapsedControl"] button {{
+[data-testid="collapsedControl"] button,
+[data-testid="stSidebarCollapseButton"] button {{
     display:flex !important;
     align-items:center !important;
     gap:8px !important;
@@ -387,23 +390,28 @@ html, body, [class*="css"] {{ font-family: 'Segoe UI', sans-serif; }}
     box-shadow:0 10px 24px rgba(0,0,0,.14) !important;
 }}
 
-[data-testid="collapsedControl"] button:hover {{
+[data-testid="collapsedControl"] button:hover,
+[data-testid="stSidebarCollapseButton"] button:hover {{
     background:#ffeecf !important;
     border-color:#dcb677 !important;
 }}
 
-[data-testid="collapsedControl"] svg {{
+[data-testid="collapsedControl"] svg,
+[data-testid="stSidebarCollapseButton"] svg {{
     width:26px !important;
     height:26px !important;
     flex:0 0 auto !important;
 }}
 
-[data-testid="collapsedControl"] button::after {{
+[data-testid="collapsedControl"] button::after,
+[data-testid="stSidebarCollapseButton"] button::after {{
     content:"Menú";
     font-size:18px;
     font-weight:700;
     color:#4e4e4e;
     line-height:1;
+    margin-left:4px;
+    white-space:nowrap;
 }}
 
 
